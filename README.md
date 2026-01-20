@@ -1,3 +1,5 @@
+<p><img src="https://github.com/OneDroid/QuickManual/blob/main/QuickManual.png" alt="RadioWave Logo" width="128"/></p>
+
 ## QuickManual
 
 **QuickManual** is a **free and open-source Chrome & Firefox extension** that drastically simplifies adding **manual time entries in Monitask**.
