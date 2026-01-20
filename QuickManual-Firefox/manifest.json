@@ -1,0 +1,46 @@
+{
+    "manifest_version": 2,
+    "name": "QuickManual",
+    "version": "2.0",
+    "description": "Automatically detects inactivity gaps on Monitask Timeline and helps fill manual time entries with one click.",
+    "icons": {
+        "48": "icons/icon-48.svg",
+        "96": "icons/icon-96.svg"
+    },
+    "permissions": [
+        "activeTab",
+        "storage",
+        "https://app.monitask.com/*",
+        "https://www.monitask.com/*",
+        "https://monitask.com/*"
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://app.monitask.com/*",
+                "https://www.monitask.com/*",
+                "https://monitask.com/*",
+                "file:///*Monitask*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "css": [
+                "styles.css"
+            ],
+            "run_at": "document_idle"
+        }
+    ],
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_title": "Monitask Auto Time Filler",
+        "default_icon": {
+            "48": "icons/icon-48.svg"
+        }
+    }
+}

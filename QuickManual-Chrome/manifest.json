@@ -1,0 +1,49 @@
+{
+    "manifest_version": 3,
+    "name": "QuickManual",
+    "version": "1.0",
+    "description": "Quickly add manual time entries on Monitask by clicking inactive time blocks.",
+    "icons": {
+        "16": "icons/icon-16.svg",
+        "48": "icons/icon-48.svg",
+        "128": "icons/icon-128.svg"
+    },
+    "permissions": [
+        "activeTab",
+        "storage",
+        "contextMenus"
+    ],
+    "host_permissions": [
+        "https://app.monitask.com/*",
+        "https://www.monitask.com/*",
+        "https://monitask.com/*",
+        "file:///*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://app.monitask.com/*",
+                "https://www.monitask.com/*",
+                "https://monitask.com/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "css": [
+                "styles.css"
+            ],
+            "run_at": "document_idle"
+        }
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "QuickManual",
+        "default_icon": {
+            "16": "icons/icon-16.svg",
+            "48": "icons/icon-48.svg"
+        }
+    }
+}
