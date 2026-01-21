@@ -1,8 +1,8 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "QuickManual",
-    "version": "2.0",
-    "description": "Automatically detects inactivity gaps on Monitask Timeline and helps fill manual time entries with one click.",
+    "version": "1.0",
+    "description": "Quickly add manual time entries on Monitask by clicking inactive time blocks.",
     "icons": {
         "48": "icons/icon-48.svg",
         "96": "icons/icon-96.svg"
@@ -10,6 +10,9 @@
     "permissions": [
         "activeTab",
         "storage",
+        "contextMenus"
+    ],
+    "host_permissions": [
         "https://app.monitask.com/*",
         "https://www.monitask.com/*",
         "https://monitask.com/*"
@@ -24,8 +27,7 @@
             "matches": [
                 "https://app.monitask.com/*",
                 "https://www.monitask.com/*",
-                "https://monitask.com/*",
-                "file:///*Monitask*"
+                "https://monitask.com/*"
             ],
             "js": [
                 "content.js"
@@ -36,11 +38,17 @@
             "run_at": "document_idle"
         }
     ],
-    "browser_action": {
+    "action": {
         "default_popup": "popup.html",
-        "default_title": "Monitask Auto Time Filler",
+        "default_title": "QuickManual",
         "default_icon": {
             "48": "icons/icon-48.svg"
+        }
+    },
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "quickmanual@monitask.addon",
+            "strict_min_version": "109.0"
         }
     }
 }

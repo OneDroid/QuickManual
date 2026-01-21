@@ -1,39 +1,42 @@
 /**
- * QuickManual - Popup Script for Chrome
+ * QuickManual - Popup Script
+ * Optimized for Production (Chrome & Firefox)
  */
 
+const ext = typeof chrome !== 'undefined' ? chrome : (typeof browser !== 'undefined' ? browser : null);
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Open Timeline button
-    document.getElementById('openTimeline').addEventListener('click', () => {
-        chrome.tabs.create({
-            url: 'https://app.monitask.com/report/'
-        });
+    const openBtn = document.getElementById('openTimeline');
+    const statusDot = document.querySelector('.status-dot');
+    const statusText = document.querySelector('.status span');
+
+    // Open Monitask button
+    openBtn.addEventListener('click', () => {
+        ext.tabs.create({ url: 'https://app.monitask.com/report/' });
         window.close();
     });
 
     // Update status based on current tab
-    updateStatus();
-});
+    async function updateStatus() {
+        try {
+            const tabs = await ext.tabs.query({ active: true, currentWindow: true });
+            if (tabs && tabs[0]) {
+                const isMonitask = tabs[0].url && tabs[0].url.includes('monitask.com');
 
-async function updateStatus() {
-    try {
-        const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-        if (tab) {
-            const url = tab.url || '';
-            const isMonitask = url.includes('monitask.com');
-
-            const statusDot = document.querySelector('.status-dot');
-            const statusText = document.querySelector('.status span');
-
-            if (isMonitask) {
-                statusDot.style.background = '#00ff88';
-                statusText.textContent = 'Active on Monitask';
-            } else {
-                statusDot.style.background = '#ffcc00';
-                statusText.textContent = 'Open Monitask to use';
+                if (isMonitask) {
+                    statusDot.style.background = '#38ef7d';
+                    statusText.textContent = 'Active on Monitask';
+                } else {
+                    statusDot.style.background = '#ffd700';
+                    statusText.textContent = 'Open Monitask to use';
+                }
             }
+        } catch (err) {
+            console.error('QuickManual: Error checking tab status', err);
         }
-    } catch (err) {
-        console.error('Error updating status:', err);
     }
-}
+
+    if (ext && ext.tabs) {
+        updateStatus();
+    }
+});

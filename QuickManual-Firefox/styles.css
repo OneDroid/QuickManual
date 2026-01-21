@@ -1,83 +1,90 @@
-/* Monitask Auto Time Filler Styles */
+/* QuickManual - Primary Styles for Chrome and Firefox */
 
-/* Make inactive blocks look clickable */
-.note-element[data-matf-enhanced="true"] {
-    cursor: pointer !important;
-    transition: outline 0.2s ease, transform 0.2s ease;
+:root {
+    --qm-primary: #667eea;
+    --qm-primary-hover: #5a67d8;
+    --qm-primary-active: #4c51bf;
+    --qm-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    --qm-shadow-hover: 0 6px 16px rgba(102, 126, 234, 0.4);
 }
 
-.note-element[data-matf-enhanced="true"]:hover {
-    outline: 2px dashed #667eea !important;
-    outline-offset: -2px !important;
-    transform: scale(1.02);
-}
-
-.note-element[data-matf-enhanced="true"]:hover .note-element-body {
-    opacity: 0.9;
-}
-
-/* Add a visual indicator that this block is clickable */
-.note-element[data-matf-enhanced="true"]::after {
-    content: '+ Click to add manual time';
+/* Button container - hidden by default, shown on hover */
+.qm-btn-container {
     position: absolute;
-    bottom: 100%;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: 600;
-    white-space: nowrap;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.2s ease;
     pointer-events: none;
-    z-index: 1000;
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+    transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
-.note-element[data-matf-enhanced="true"]:hover::after {
+/* Show container when hovering the parent block */
+.note-element:hover .qm-btn-container {
     opacity: 1;
     visibility: visible;
-    bottom: calc(100% + 5px);
+    pointer-events: auto;
 }
 
-/* Toast notification styles */
-.matf-toast {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+/* The Add Manual button */
+.qm-add-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    background: var(--qm-primary);
     color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
-    z-index: 100000;
-    animation: matf-slide-in 0.3s ease;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: var(--qm-shadow);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    outline: none;
+    -webkit-font-smoothing: antialiased;
 }
 
-.matf-toast.matf-success {
-    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-    box-shadow: 0 4px 16px rgba(56, 239, 125, 0.4);
+.qm-add-btn:hover {
+    background: var(--qm-primary-hover);
+    box-shadow: var(--qm-shadow-hover);
 }
 
-.matf-toast.matf-error {
-    background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
-    box-shadow: 0 4px 16px rgba(235, 51, 73, 0.4);
+.qm-add-btn:active {
+    background: var(--qm-primary-active);
+    transform: scale(0.98);
 }
 
-@keyframes matf-slide-in {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
+/* Visual indicator on the block itself when hovered */
+.note-element:has(.qm-btn-container):hover {
+    box-shadow: inset 0 0 0 2px var(--qm-primary) !important;
+}
 
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+/* Position relative for the block to contain the button */
+.note-element.qm-processed {
+    position: relative !important;
+}
+
+/* Inactive block body softening */
+.note-element:has(.qm-btn-container):hover .note-element-body {
+    opacity: 0.6;
+}
+
+/* Precise blue stripe segment overlay for manual requests */
+.qm-manual-segment {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: repeating-linear-gradient(45deg,
+            rgba(0, 114, 255, 0.15),
+            rgba(0, 114, 255, 0.15) 10px,
+            rgba(0, 114, 255, 0.25) 10px,
+            rgba(0, 114, 255, 0.25) 20px) !important;
+    border-left: 1px solid rgba(0, 114, 255, 0.3);
+    border-right: 1px solid rgba(0, 114, 255, 0.3);
 }

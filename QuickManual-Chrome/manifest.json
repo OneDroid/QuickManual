@@ -16,8 +16,7 @@
     "host_permissions": [
         "https://app.monitask.com/*",
         "https://www.monitask.com/*",
-        "https://monitask.com/*",
-        "file:///*"
+        "https://monitask.com/*"
     ],
     "background": {
         "service_worker": "background.js"

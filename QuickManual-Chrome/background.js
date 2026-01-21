@@ -1,33 +1,39 @@
 /**
- * QuickManual - Background Service Worker for Chrome
+ * QuickManual - Background Script
+ * Optimized for Production (Chrome & Firefox)
  */
 
-// Create context menu on install
-chrome.runtime.onInstalled.addListener(() => {
-    chrome.contextMenus.create({
-        id: "qm-fill-time",
-        title: "Fill Manual Time Entry",
-        contexts: ["selection"]
+const ext = typeof chrome !== 'undefined' ? chrome : (typeof browser !== 'undefined' ? browser : null);
+
+if (ext) {
+    // Create context menu on install
+    ext.runtime.onInstalled.addListener(() => {
+        ext.contextMenus.create({
+            id: "qm-fill-time",
+            title: "Fill Manual Time Entry",
+            contexts: ["selection"]
+        });
     });
-    console.log('[QuickManual] Extension installed');
-});
 
-// Handle context menu click
-chrome.contextMenus.onClicked.addListener((info, tab) => {
-    if (info.menuItemId === "qm-fill-time" && info.selectionText) {
-        chrome.tabs.sendMessage(tab.id, {
-            action: "fillTimeFromSelection",
-            selectionText: info.selectionText
-        });
-    }
-});
+    // Handle context menu click
+    ext.contextMenus.onClicked.addListener((info, tab) => {
+        if (info.menuItemId === "qm-fill-time" && info.selectionText) {
+            ext.tabs.sendMessage(tab.id, {
+                action: "fillTimeFromSelection",
+                selectionText: info.selectionText
+            }).catch(() => {
+                // Ignore errors if content script is not injected
+            });
+        }
+    });
 
-// Handle messages from popup
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === "openTimeline") {
-        chrome.tabs.create({
-            url: "https://app.monitask.com/report/timeline"
-        });
-    }
-    return true;
-});
+    // Handle messages
+    ext.runtime.onMessage.addListener((request, sender, sendResponse) => {
+        if (request.action === "openTimeline") {
+            ext.tabs.create({
+                url: "https://app.monitask.com/report/timeline"
+            });
+        }
+        return true;
+    });
+}

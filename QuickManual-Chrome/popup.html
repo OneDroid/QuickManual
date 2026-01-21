@@ -6,44 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuickManual</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --bg: #ffffff;
+            --text: #2d3748;
+            --text-light: #718096;
+            --success: #38ef7d;
+            --warning: #ffd700;
         }
 
         body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             width: 320px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
-            color: white;
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+            background: #f7fafc;
         }
 
         .header {
-            padding: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 24px 20px;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
 
         .header h1 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .header h1 svg {
-            width: 24px;
-            height: 24px;
-            fill: currentColor;
+            margin: 0;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
 
         .header p {
-            font-size: 12px;
-            opacity: 0.8;
+            margin: 4px 0 0;
+            opacity: 0.9;
+            font-size: 13px;
         }
 
         .content {
@@ -53,195 +53,128 @@
         .status {
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            background: white;
             padding: 12px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
-            font-size: 13px;
-            margin-bottom: 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            font-size: 14px;
+            font-weight: 500;
         }
 
         .status-dot {
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: #00ff88;
-            animation: pulse 2s infinite;
+            margin-right: 10px;
+            background: var(--warning);
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
         }
 
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.5;
-            }
+        .features {
+            margin-bottom: 20px;
         }
 
-        .section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 16px;
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .section-title svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
-
-        .steps {
-            list-style: none;
-        }
-
-        .steps li {
-            font-size: 12px;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        .feature-item {
             display: flex;
             align-items: flex-start;
-            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--text-light);
         }
 
-        .steps li:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .step-num {
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: 700;
+        .feature-item svg {
+            margin-right: 10px;
             flex-shrink: 0;
+            color: var(--primary);
         }
 
         .btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            transition: all 0.2s ease;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            text-decoration: none;
         }
 
-        .btn svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
         }
 
-        .btn-primary {
-            background: white;
-            color: #0072ff;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        .btn:active {
+            transform: translateY(0);
         }
 
         .footer {
-            padding: 12px 20px;
             text-align: center;
+            padding: 16px;
             font-size: 11px;
-            opacity: 0.6;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .highlight {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 600;
+            color: var(--text-light);
+            border-top: 1px solid #edf2f7;
         }
     </style>
 </head>
 
-<div class="header">
-    <h1>
-        QuickManual
-    </h1>
-    <p>Developed by Tawhid Monowar</p>
-</div>
-
-<div class="content">
-    <div class="status">
-        <div class="status-dot"></div>
-        <span>Extension Active</span>
+<body>
+    <div class="header">
+        <h1>QuickManual</h1>
+        <p>Developed by your beloved <a href="https://tawhidmonowar.github.io/" target="_blank"
+                style="color: white;">Tawheed</a></p>
     </div>
 
-    <div class="section">
-        <div class="section-title">
-            <svg viewBox="0 0 24 24">
-                <path
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
-            </svg>
-            How to Use
+    <div class="content">
+        <div class="status">
+            <div class="status-dot"></div>
+            <span>Checking status...</span>
         </div>
-        <ol class="steps">
-            <li>
-                <span class="step-num">1</span>
-                <span>Go to <span class="highlight">Monitask Timeline</span> page</span>
-            </li>
-            <li>
-                <span class="step-num">2</span>
-                <span>Hover over any <span class="highlight">gray</span> or <span class="highlight">pink</span> inactive
-                    time block in timeline</span>
-            </li>
-            <li>
-                <span class="step-num">3</span>
-                <span>Click the <span class="highlight">Add Manual</span> button that appears</span>
-            </li>
-            <li>
-                <span class="step-num">4</span>
-                <span>Dialog opens with <span class="highlight">start & end times</span> auto-filled!</span>
-            </li>
-            <li>
-                <span class="step-num">5</span>
-                <span>Select project, task, and click <span class="highlight">Save</span></span>
-            </li>
-        </ol>
+
+        <div class="features">
+            <div class="feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Hover over inactive blocks to add time
+            </div>
+            <div class="feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Select text time range and right-click to fill
+            </div>
+            <div class="feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Auto-calculates total manual time requests
+            </div>
+        </div>
+
+        <button id="openTimeline" class="btn">
+            Open Monitask Reports
+        </button>
     </div>
 
-    <button class="btn btn-primary" id="openTimeline">
-        <svg viewBox="0 0 24 24">
-            <path
-                d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
-        </svg>
-        Open Monitask Timeline
-    </button>
-</div>
+    <div class="footer">
+        QuickManual v1.0
+    </div>
 
-<div class="footer">
-    A gift from your beloved Tawheed
-</div>
-
-<script src="popup.js"></script>
+    <script src="popup.js"></script>
 </body>
 
 </html>

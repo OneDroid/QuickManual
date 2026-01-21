@@ -1,129 +1,58 @@
-# Monitask Auto Time Filler
+# QuickManual - Firefox Extension for Monitask
 
-A Firefox browser extension that automatically detects inactivity gaps on the Monitask Timeline page and allows you to fill manual time entries with just one click.
+A Firefox browser extension that adds "Add Manual" buttons to inactive time blocks on the Monitask Timeline page.
 
 ## Features
 
-- 🔍 **Auto-Detection**: Automatically scans the Monitask Timeline page for inactive/gap periods
-- ⏱️ **One-Click Fill**: Click on any inactive period to automatically fill the manual time entry form
-- 🎯 **Hover Buttons**: Hover over inactive time blocks to see a quick "Add Manual" button
-- 📋 **Floating Panel**: View all inactive periods in a convenient floating panel
-- 📝 **Context Menu**: Right-click on selected time text to fill the form (e.g., "10:00 AM - 11:30 AM")
-- 🎨 **Beautiful UI**: Modern, gradient-styled interface
+- Purple-themed UI - Clean, modern design
+- Hover to reveal - "Add Manual" button appears when you hover over inactive blocks
+- One-click fill - Automatically opens dialog and fills start/end times
+- Context menu - Right-click on selected time text to fill manually
+- Auto-calculate Manual Time - Automatically sums all manual time requests and shows the total at the bottom of the table
 
 ## Installation
 
-### Method 1: Temporary Installation (for testing)
-
-1. Open Firefox and navigate to `about:debugging`
-2. Click on "This Firefox" in the left panel
-3. Click "Load Temporary Add-on..."
-4. Navigate to the extension folder and select `manifest.json`
-
-### Method 2: Permanent Installation
-
-1. Package the extension:
-   - Zip all files in the `MonitaskAutoFiller` folder
-   - Rename the `.zip` to `.xpi`
-2. Open Firefox and navigate to `about:addons`
-3. Click the gear icon and select "Install Add-on From File..."
-4. Select the `.xpi` file
+1. Open Firefox and go to `about:debugging#/runtime/this-firefox`
+2. Click **"Load Temporary Add-on"**
+3. Select the `manifest.json` file in the `QuickManual-Firefox` folder
+4. The extension is now installed!
 
 ## Usage
 
-### On the Monitask Timeline Page:
+1. Go to your **Monitask Timeline** page (`https://app.monitask.com/report/timeline`)
+2. **Hover** over any gray or pink inactive time block
+3. An **"Add Manual"** button will appear
+4. **Click** the button
+5. The "Add Manual Time" dialog opens with times auto-filled!
+6. Fill in project, task, and comment, then Save
 
-1. **Floating Button**: Look for the clock button (⏱️) at the bottom-right corner
-   - Click it to open a panel showing all detected inactive periods
-   - Click "Fill" next to any period to auto-fill the manual time form
-
-2. **Hover Buttons**: Hover over any gray/pink inactive time block in the timeline
-   - A purple "Add Manual" button will appear
-   - Click it to fill the form with that time period
-
-3. **Context Menu**: Select any time range text on the page (e.g., "9:28:43 AM Ending on 9:38:53 AM")
-   - Right-click the selection
-   - Choose "Fill Manual Time Entry"
-
-### Detected Inactive Periods:
-
-The extension detects the following types of inactive time:
-
-- **Gray blocks**: Offline/gap periods with no activity
-- **Pink blocks**: Marked as "(Inactive Time)" by Monitask
-- **Tooltip times**: Reads "Started on X:XX:XX AM Ending on X:XX:XX AM" from tooltips
-
-## Files Structure
+## Files
 
 ```
-MonitaskAutoFiller/
-├── manifest.json        # Extension configuration
-├── background.js        # Background script for context menu
-├── content.js           # Main content script for timeline page
-├── styles.css           # Styling for overlays and buttons
-├── popup.html           # Extension popup UI
-├── popup.js             # Popup script
+QuickManual-Firefox/
+├── manifest.json      # Firefox Manifest V3 config
+├── background.js      # Background script
+├── content.js         # Main script that adds buttons
+├── styles.css         # Button and highlight styles
+├── popup.html         # Extension popup
+├── popup.js           # Popup logic
 ├── icons/
-│   ├── icon-48.svg      # 48px icon
-│   └── icon-96.svg      # 96px icon
-└── README.md            # This file
+│   ├── icon-48.svg
+│   └── icon-96.svg
+└── README.md
 ```
 
-## Form Fields Filled
+## Permissions
 
-When you click to fill, the extension automatically populates:
+- `activeTab` - Access current tab
+- `storage` - Save preferences
+- `contextMenus` - Right-click menu
+- `host_permissions` - Run on Monitask pages
 
-- **From Time**: Start time of the inactive period
-- **To Time**: End time of the inactive period
+## Version
 
-You will still need to:
-- Select a Project (if not already selected)
-- Select or add a Task
-- Optionally add a Comment
-- Click "Save" to submit
-
-## Permissions Required
-
-- `activeTab`: To access the current tab's content
-- `storage`: To save extension preferences
-- `https://app.monitask.com/*`: To run on Monitask pages
-- `https://www.monitask.com/*`: To run on Monitask pages
-- `https://monitask.com/*`: To run on Monitask pages
-
-## Troubleshooting
-
-### Extension not detecting inactive periods?
-
-1. Make sure you're on the Monitask Timeline page
-2. Wait for the page to fully load
-3. Click the floating clock button and click "Rescan Page"
-
-### Form not filling correctly?
-
-1. Make sure the "Add Manual Time" dialog is open
-2. If the timepicker has issues, try manually clicking the time fields after auto-fill
-
-### Button not appearing on inactive blocks?
-
-Some inactive blocks may be too small to show the button. Use the floating panel instead.
-
-## Development
-
-To modify this extension:
-
-1. Edit the source files
-2. Go to `about:debugging` in Firefox
-3. Click "Reload" next to the extension
-
-## Version History
-
-- **v2.0**: Complete rewrite with floating panel, hover buttons, and improved detection
-- **v1.0**: Initial version with context menu support
-
-## License
-
-MIT License - Feel free to modify and distribute.
+- **v1.0** - Initial release
 
 ---
 
-Made with ❤️ for Monitask users
+Made for Monitask users

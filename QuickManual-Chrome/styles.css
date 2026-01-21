@@ -1,4 +1,12 @@
-/* QuickManual - Styles for Chrome Extension */
+/* QuickManual - Primary Styles for Chrome and Firefox */
+
+:root {
+    --qm-primary: #667eea;
+    --qm-primary-hover: #5a67d8;
+    --qm-primary-active: #4c51bf;
+    --qm-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    --qm-shadow-hover: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
 
 /* Button container - hidden by default, shown on hover */
 .qm-btn-container {
@@ -9,21 +17,24 @@
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.2s ease;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
+/* Show container when hovering the parent block */
 .note-element:hover .qm-btn-container {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
 
-/* The Add Manual button - Blue theme for Chrome */
+/* The Add Manual button */
 .qm-add-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 8px 16px;
-    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+    background: var(--qm-primary);
     color: white;
     border: none;
     border-radius: 6px;
@@ -31,26 +42,49 @@
     font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
-    box-shadow: 0 4px 12px rgba(0, 114, 255, 0.5);
-    transition: all 0.2s ease;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    box-shadow: var(--qm-shadow);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    outline: none;
+    -webkit-font-smoothing: antialiased;
 }
 
 .qm-add-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(0, 114, 255, 0.6);
+    background: var(--qm-primary-hover);
+    box-shadow: var(--qm-shadow-hover);
 }
 
 .qm-add-btn:active {
+    background: var(--qm-primary-active);
     transform: scale(0.98);
 }
 
-/* Highlight inactive block on hover */
+/* Visual indicator on the block itself when hovered */
 .note-element:has(.qm-btn-container):hover {
-    outline: 2px dashed #0072ff;
-    outline-offset: -2px;
+    box-shadow: inset 0 0 0 2px var(--qm-primary) !important;
 }
 
+/* Position relative for the block to contain the button */
+.note-element.qm-processed {
+    position: relative !important;
+}
+
+/* Inactive block body softening */
 .note-element:has(.qm-btn-container):hover .note-element-body {
-    opacity: 0.7;
+    opacity: 0.6;
+}
+
+/* Precise blue stripe segment overlay for manual requests */
+.qm-manual-segment {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: repeating-linear-gradient(45deg,
+            rgba(0, 114, 255, 0.15),
+            rgba(0, 114, 255, 0.15) 10px,
+            rgba(0, 114, 255, 0.25) 10px,
+            rgba(0, 114, 255, 0.25) 20px) !important;
+    border-left: 1px solid rgba(0, 114, 255, 0.3);
+    border-right: 1px solid rgba(0, 114, 255, 0.3);
 }
