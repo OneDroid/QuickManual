@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "QuickManual",
     "version": "1.0",
-    "description": "Quickly add manual time entries on Monitask by clicking inactive time blocks.",
+    "description": "Quickly add manual time entries on Monitask by clicking inactive time blocks. Developed by Tawheed Monowar.",
     "icons": {
         "16": "icons/icon-16.svg",
         "48": "icons/icon-48.svg",
